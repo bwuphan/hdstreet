@@ -1,4 +1,9 @@
 <!---Get page content for fld_pageID = 6--->
+<cfquery datasource="hdStreet" name="rsPage">
+	SELECT FLD_PAGETITLE, FLD_PAGECONTENT
+	FROM TBL_PAGES
+	WHERE FLD_PAGEID = 6 AND FLD_PAGEISACTIVE = 1
+</cfquery>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,19 +40,10 @@
   </div>
   <div id="pageBody">
   <!---Erase from here--->
-<h1>Contact us
-</h1>
-    <h2>Our mailing address</h2>
-<p>Hd Street band<br />
-  c/o Mr Tony Sapere<br />
-  11555 Southfork Ave<br />
-  70816 Baton Rouge LA
-  <br />
-</p>
-<h2>Contact us by e-mail</h2>
-<p><a href="mailto:info@hdstreetband.com">info@hdstreetband.com</a></p>
-<h2>contact us by phone</h2>
-<p>(225) - 295-1234</p>
+	<cfoutput>
+		<h1>#rsPage.FLD_PAGETITLE#</h1>
+			#rsPage.FLD_PAGECONTENT#
+	</cfoutput>
 <!---To here--->
 </div>
   <div id="footer">
