@@ -7,7 +7,7 @@
 
 <body>
 	<!---Step 1 - Create an array using explicit notation--->
-
+	<cfset aColors = arrayNew(1) />
 	<p>Dump the explicit array</p>
 	
 	<!---Step 2 - Create an array using the implicit array notation--->
