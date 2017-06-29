@@ -57,7 +57,7 @@
 			<tr>
 				<td>#dateFormat(FLD_NEWSCREATIONDATE, 'mmm dd yyyy')#</td>
 				<td>#FLD_NEWSTITLE#</td>
-				<td><a href="news.cfm">Read More</a></td>
+				<td><a href="news.cfm?newsID=#FLD_NEWSID#">Read More</a></td>
 			</tr>
 		</cfoutput>
       </table>
@@ -67,7 +67,7 @@
 <h1>News archive</h1>
       <ul>
         <cfoutput query="rsNewsYears" group="fld_newsYear">
-        	<li><a href="news.cfm">#fld_newsYear#</a></li>
+        	<li><a href="news.cfm?year=#fld_newsYear#">#fld_newsYear#</a></li>
         </cfoutput>
       </ul>
       <p class="alignRight">&nbsp;</p>
