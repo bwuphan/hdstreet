@@ -34,45 +34,28 @@
   </div>
   <div id="pageBody">
     <div id="calendarContent">
+    	<cfquery datasource="hdStreet" name="rsCurrentEvents">
+    		SELECT FLD_EVENTID, FLD_EVENTNAME, FLD_EVENTDATETIME, FLD_EVENTLOCATION, FLD_EVENTVENUE
+    		FROM TBL_EVENTS
+    		WHERE FLD_EVENTDATETIME >= #now()#
+    		ORDER BY FLD_EVENTDATETIME ASC
+    	</cfquery>
 <h1> Agenda</h1>
       <!---Chapter 4 - Delete From HERE--->
-      <p>&nbsp;</p>
-      <table>
-        <caption>
-          upcoming events
-        </caption>
-        <tr>
-          <th>Jul 19 - 5:00 pm</th>
-          <td>Summer sounds festival - Redville AK</td>
-          <td><a href="events/20110719.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Jul 20 - 4:30 pm</th>
-          <td>Summer sounds festival - Redville AK</td>
-          <td><a href="events/20110720.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Jul 22 - 7:00 pm</th>
-          <td>Summer sounds festival - Redville AK</td>
-          <td><a href="events/20110722.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Sept 15 - 8:00 pm</th>
-          <td>Back to school concert - Baton Rouge LA</td>
-          <td><a href="events/20110915.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Dec 18 - 8:00pm</th>
-          <td>Christmas concert - Baton Rouge LA</td>
-          <td><a href="events/20111218.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Mar 16 - 4:00 pm</th>
-          <td>Mardi gras parade - Prairieville LA</td>
-          <td><a href="events/20120316.html">Read More</a></td>
-        </tr>
-      </table>
-      <p>&nbsp;</p>
+   <cfif rsCurrentEvents.recordCount EQ 0>
+   		<p>Sorry, there are no events to display at this time</p>
+   <cfelse>	
+   		<table>
+   			<cfoutput query="rsCurrentEvents">
+   				<tr>
+   					<th>#dateFormat(FLD_EVENTDATETIME, 'mmm dd yyyy')#</th>
+   					<td>#FLD_EVENTNAME# - #FLD_EVENTDATETIME# (#FLD_EVENTVENUE#)</td>
+   					<td><a href="agenda.cfm">READ MORE</a></td>
+   				</tr>
+   				
+   			</cfoutput>
+   		</table>
+   </cfif>
       <!---Chapter 4 - To HERE--->
 </div>
     <div id="calendarSideBar">
