@@ -36,34 +36,26 @@
   <div id="pageBody">
     <div id="calendarContent">
 <!---Chapter 4 - Erase from here--->
-      <h1> News</h1>
-      <p>&nbsp;</p>
+	<!---Output all news if no url scope newsID not present in URL--->
+
+
+	<!---Get all news--->
+		<cfquery datasource="hdStreet" name="rsAllNews">
+			SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
+			FROM TBL_NEWS
+			ORDER BY FLD_NEWSCREATIONDATE DESC
+		</cfquery>
+	  <h1> News</h1>
       <table>
-        <caption>
-          Latest news
-        </caption>
-        <tr>
-          <th>May 12th</th>
-          <td>HD Street to play out of state</td>
-          <td><a href="news/20110512.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>May 6th</th>
-          <td>New concerts announced</td>
-          <td><a href="news/20110506.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Apr 30th</th>
-          <td>Happy birthday Tony</td>
-          <td><a href="news/20110430.html">Read More</a></td>
-        </tr>
-        <tr>
-          <th>Jan 14th</th>
-          <td>Happy new year</td>
-          <td><a href="news/20110114.html">Read More</a></td>
-        </tr>
+		<!---Output  news in a table--->
+		<cfoutput query="rsAllNews">
+			<tr>
+				<td>#dateFormat(FLD_NEWSCREATIONDATE, 'mmm dd yyyy')#</td>
+				<td>#FLD_NEWSTITLE#</td>
+				<td><a href="news.cfm">Read More</a></td>
+			</tr>
+		</cfoutput>
       </table>
-      <p>&nbsp;</p>
       <!---Chapter 4 - To here--->
 </div>
     <div id="calendarSideBar">
