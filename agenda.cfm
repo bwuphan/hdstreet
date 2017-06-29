@@ -59,13 +59,19 @@
       <!---Chapter 4 - To HERE--->
 </div>
     <div id="calendarSideBar">
-<h1>Next Event</h1>
-      <div id="EventDetails">
-        <p id="eventDate"><span id="month">Jul</span> <span id="days">19</span></p>
-        <h2>Summer sounds Festival</h2>
-      </div>
-      <p> Phasellus ac justo sapien, vitae mattis  justo. Cras malesuada posuere ante, non eleifend magna auctor sit amet.  Cras placerat mi eu lectus viverra rutrum. </p>
-      <p class="alignRight"><a href="events/20110719.html">Read More</a></p>
+    	<cfif rsCurrentEvents.recordCount EQ 0>
+    		<p>Sorry, there are no events to display at this time</p>
+    	<cfelse>
+    		<cfoutput >
+    			<h1>Next Event</h1>
+			      <div id="EventDetails">
+			        <p id="eventDate"><span id="month">#dateFormat(rsCurrentEvents.FLD_EVENTDATETIME, 'mmm')#</span> <span id="days">#dateFormat(rsCurrentEvents.FLD_EVENTDATETIME, 'dd')#</span></p>
+			        <h2>#rsCurrentEvents.FLD_EVENTNAME#</h2>
+			      </div>
+			      
+			      <p class="alignRight"><a href="events/20110719.html">Read More</a></p>
+    		</cfoutput>
+      </cfif>
 </div>
   </div>
   <div id="footer">
