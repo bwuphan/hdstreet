@@ -1,4 +1,9 @@
 <!---Get news years--->
+<cfquery datasource="hdStreet" name="rsNewsYears">
+	SELECT YEAR(FLD_NEWSCREATIONDATE) AS fld_newsYear
+	FROM TBL_NEWS
+	ORDER BY FLD_NEWSCREATIONDATE DESC
+</cfquery>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,10 +66,9 @@
     <div id="calendarSideBar">
 <h1>News archive</h1>
       <ul>
-        <li><a href="#">2010</a></li>
-        <li><a href="#">2009</a></li>
-        <li><a href="#">2008</a></li>
-        <li><a href="#">2007</a></li>
+        <cfoutput query="rsNewsYears" group="fld_newsYear">
+        	<li><a href="news.cfm">#fld_newsYear#</a></li>
+        </cfoutput>
       </ul>
       <p class="alignRight">&nbsp;</p>
 </div>
