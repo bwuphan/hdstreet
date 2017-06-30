@@ -41,6 +41,20 @@
   <div id="pageBody">
     <div id="calendarContent">
 <!---Chapter 4 - Erase from here--->
+	<cfif isDefined('url.newsID')>
+		<!---output a single news--->
+		<cfquery datasource="hdStreet" name="rsSingleNews">
+			SELECT TBL_NEWS.FLD_NEWSCONTENT, TBL_NEWS.FLD_NEWSTITLE, TBL_NEWS.FLD_NEWSCREATIONDATE, TBL_USERS.FLD_USERFIRSTNAME, TBL_USERS.FLD_USERLASTNAME
+			FROM TBL_NEWS INNER JOIN TBL_USERS ON TBL_NEWS.FLD_NEWSAUTHOR = TBL_USERS.FLD_USERID
+			WHERE FLD_NEWSID = #url.newsID#
+		</cfquery>
+		<cfoutput>
+			<h1>#rsSingleNews.FLD_NEWSTITLE#</h1>
+			<p class="metadata">Published on #dateFormat(rsSingleNews.FLD_NEWSCREATIONDATE, 'mmm dd yyyy')# by #rsSingleNews.FLD_USERFIRSTNAME# #rsSingleNews.FLD_USERLASTNAME#></p>
+			#rsSingleNews.FLD_NEWSCONTENT#
+		</cfoutput>
+	<cfelse>
+	
 	<!---Output all news if no url scope newsID not present in URL--->
 
 
@@ -61,6 +75,7 @@
 			</tr>
 		</cfoutput>
       </table>
+      </cfif>
       <!---Chapter 4 - To here--->
 </div>
     <div id="calendarSideBar">
