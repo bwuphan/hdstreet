@@ -53,6 +53,24 @@
 			<p class="metadata">Published on #dateFormat(rsSingleNews.FLD_NEWSCREATIONDATE, 'mmm dd yyyy')# by #rsSingleNews.FLD_USERFIRSTNAME# #rsSingleNews.FLD_USERLASTNAME#></p>
 			#rsSingleNews.FLD_NEWSCONTENT#
 		</cfoutput>
+	<cfelseif isDefined('url.year')>
+		<cfquery datasource="hdStreet" name="rsNewsOfYear">
+			SELECT FLD_NEWSTITLE, FLD_NEWSCREATIONDATE, FLD_NEWSID
+			FROM TBL_NEWS
+			WHERE year(FLD_NEWSCREATIONDATE) = #url.year#
+			ORDER BY FLD_NEWSCREATIONDATE DESC
+		</cfquery>
+		<h1>All the news of year <cfoutput>#url.year#</cfoutput></h1>
+		<table>
+		<!---Output  news in a table--->
+		<cfoutput query="rsNewsOfYear">
+			<tr>
+				<td>#dateFormat(FLD_NEWSCREATIONDATE, 'mmm dd yyyy')#</td>
+				<td>#FLD_NEWSTITLE#</td>
+				<td><a href="news.cfm?newsID=#FLD_NEWSID#">Read More</a></td>
+			</tr>
+		</cfoutput>
+      </table>
 	<cfelse>
 	
 	<!---Output all news if no url scope newsID not present in URL--->

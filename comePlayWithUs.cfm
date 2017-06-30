@@ -49,16 +49,16 @@
 	</div>
 	<div id="calendarSideBar">
 		<h2>Complete the form below to join our band</h2>
-		<form id="frm_newUser" action="mailto:name@company.com">
+		<cfform id="frm_newUser">
 				<fieldset>
 					<legend>Join our band</legend>
 					<dl>
 						<dt><label>First Name</label></dt>
-						<dd><input type="text" name="fld_userFirstName" id="fld_userFirstName" /></dd>
+						<dd><cfinput type="text" name="fld_userFirstName" id="fld_userFirstName" required="true" message="Please enter a first name" /></dd>
 						<dt><label>Last Name</label></dt>
-						<dd><input type="text" name="fld_userLastName" id="fld_userLastName" /></dd>
+						<dd><cfinput type="text" name="fld_userLastName" id="fld_userLastName" required="true" message="Please enter a last name" /></dd>
 						<dt><label>E-mail Address</label></dt>
-						<dd><input  type="text" name="fld_userEmail" id="fld_userEmail" /></dd>
+						<dd><cfinput  type="text" name="fld_userEmail" id="fld_userEmail" required="true" validate="eMail" message="Please enter a valid email address" /></dd>
 						<dt><label>Instrument</label></dt>
 						<dd>
 							<select name="fld_userInstrument" id="fld_userInstrument" >
@@ -81,7 +81,7 @@
 					</dl>
 					<input type="submit" name="fld_newUserSubmit" id="fld_newUserSubmit" value="Join the band" />
 				</fieldset>
-			</form>
+			</cfform>
 	</div>
 	</div>
  </div>
