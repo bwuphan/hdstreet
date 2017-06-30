@@ -4,6 +4,12 @@
 	FROM TBL_PAGES
 	WHERE FLD_PAGEID = 4 AND FLD_PAGEISACTIVE = 1
 </cfquery>
+<!--- get instrument list --->
+<cfquery datasource="hdStreet" name="rsInstrumentList">
+	SELECT FLD_INSTRUMENTID, FLD_INSTRUMENTNAME
+	FROM TBL_INSTRUMENTS
+	ORDER BY FLD_INSTRUMENTNAME DESC
+</cfquery>
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,20 +67,9 @@
 						<dd><cfinput  type="text" name="fld_userEmail" id="fld_userEmail" required="true" validate="eMail" message="Please enter a valid email address" /></dd>
 						<dt><label>Instrument</label></dt>
 						<dd>
-							<select name="fld_userInstrument" id="fld_userInstrument" >
+							<cfselect name="fld_userInstrument" id="fld_userInstrument" query="rsInstrumentList" value="FLD_INSTRUMENTID" display="FLD_INSTRUMENTNAME" queryposition="below">
 								<option value="0">Please choose your instrument</option>
-								<option value="1">Flute</option>
-								<option value="1">Oboe</option>
-								<option value="3">Clarinet</option>
-								<option value="4">Saxophone</option>
-								<option value="5">Trumpet</option>
-								<option value="6">Trombone</option>
-								<option value="7">Tuba</option>
-								<option value="8">String bass</option>
-								<option value="9">Harp</option>
-								<option value="10">Percussion</option>
-								<option value="11">Other</option>
-							</select>
+							</cfselect>
 						</dd>
 						<dt><label>Comment</label></dt>
 						<dd><textarea name="fld_userComment" id="fld_userComment"></textarea></dd>
